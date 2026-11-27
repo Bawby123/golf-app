@@ -68,3 +68,16 @@
 
 /* Page not found */
 .not-found{display:grid;gap:16px}
+
+/* Recording screens keep the bottom navigation: leave room for it under the thumb controls */
+.design-app.recorder .course-map{height:clamp(160px,calc(100dvh - 540px),424px)}
+.design-app.recorder .thumb-controls{padding-bottom:112px;min-height:0}
+
+/* Desktop: recording screens use the same wide frame as the rest of the app, map beside the controls */
+@media(min-width:760px){
+ .design-app.recorder{max-width:960px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(340px,1fr);grid-template-rows:auto 1fr;align-content:start}
+ .design-app.recorder .record-header{grid-column:1/-1;height:auto;padding:24px 40px 26px;border-radius:0 0 32px 32px;gap:10px}
+ .design-app.recorder .course-map{grid-column:1;height:auto;min-height:460px;margin:28px 0 124px 40px;border-radius:24px}
+ .design-app.recorder .course-map>img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+ .design-app.recorder .thumb-controls{grid-column:2;align-self:start;margin:28px 40px 124px 24px;padding:28px;border-radius:24px;border-bottom:1px solid #e1e7da}
+}

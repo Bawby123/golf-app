@@ -1,6 +1,6 @@
 import React,{useEffect,useRef,useState} from 'react';
 import {useLocation,useNavigate} from 'react-router-dom';
-import {Action,Page,Choices} from './UI.jsx';
+import {Action,Page,Choices,Navigation} from './UI.jsx';
 import {locate,metresBetween} from './gps.js';
 import {commitShot,gpsMeasurement,manualMetres,addStroke,strokesOn,playedHoles,scoreToPar,formatToPar,scoreName,suggestClub,formatDistance,toDisplayUnits,plural} from './round.js';
 import {ScoreList,clubAverages} from './Performance.jsx';
@@ -54,7 +54,7 @@ export default function RecordingFlow({data,save}){
     return ()=>{active=false;navigator.geolocation.clearWatch(id)};
   },[draft?.start?.timestamp,draft?.id,draft?.manual]);
   useWakeLock(path==='/shot'&&!!draft?.start&&draft?.manual===undefined);
-  if(!round)return <Page title="Ready when you are." showNav={false}><Action to="/courses">Choose a course to begin</Action><Action to="/" kind="quiet">Back to home</Action></Page>;
+  if(!round)return <Page title="Ready when you are." navSection={null}><Action to="/courses">Choose a course to begin</Action><Action to="/" kind="quiet">Back to home</Action></Page>;
 
   const update=fn=>save(d=>({...d,active:d.active?.id===round.id?fn(d.active):d.active}));
   const makeDraft=()=>({id:crypto.randomUUID(),hole,club});
@@ -146,11 +146,12 @@ export default function RecordingFlow({data,save}){
       <p role="status">{busy?'Keep this page open while GPS finds your position.':draft?.manual!==undefined?'Manual distance · Save when ready.':'Walk to your ball, then save. The screen stays on while measuring.'}</p>
       {draft?.start&&draft.manual===undefined&&<p className="gps-status">{signal}</p>}
     </>}</main>
+    <Navigation section={null}/>
   </div>;
   const titles={'/clubs':'Choose your club.','/manual':'Enter shot distance.','/edit-shot':'Edit your shot.','/holes':'Choose a hole.','/more':'Round actions.','/gps':'GPS unavailable.','/scorecard':'Your round.','/hole-shots':`Hole ${viewHole}.`,'/finish':'Finish this hole?','/end':'Save and end round?','/cancel':draft?.editing?'Discard your changes?':'Cancel this shot?','/shot-details':'Lie & direction.'};
   const finishStrokes=shots.length,putts=shots.filter(s=>s.type==='putt').length;
   const unplayed=18-playedHoles(round).length;
-  return <Page title={titles[path]||'Your round.'} showNav={false}>
+  return <Page title={titles[path]||'Your round.'} navSection={null}>
     {error&&<p role="alert" className="error-message">{error}</p>}
     {path==='/clubs'&&<><p>Your bag</p>{data.bag.map(c=><Action key={c} kind={club===c?'tonal':'outline'} aria-pressed={club===c} onClick={()=>{update(r=>({...r,selectedClub:r.draft?.editing?r.selectedClub:c,draft:r.draft?{...r.draft,club:c}:null}));nav(returnTo.current)}}>{c}</Action>)}<Action to={returnTo.current} kind="quiet">Back</Action></>}
     {path==='/manual'&&<><h2>{club}</h2><label className="manual-label" htmlFor="manual-distance">Distance in {unitLabel}</label><input className="manual-input" id="manual-distance" type="number" min="1" max={units==='yd'?492:450} inputMode="numeric" value={draft?.manual??''} placeholder="0" onChange={e=>changeDraft({manual:e.target.value})}/><div className="preset-row">{(units==='yd'?[100,150,200]:[100,150,200]).map(n=><Action key={n} kind={Number(draft?.manual)===n?'tonal':'outline'} onClick={()=>changeDraft({manual:String(n)})}>{n} {units}</Action>)}</div><p>Pace it out or use a marker post, then save.</p><Action onClick={saveShot} disabled={busy}>Save shot</Action><Action to="/shot-details" kind="outline">Add lie & direction · optional</Action><Action to="/cancel" kind="quiet">Cancel shot</Action></>}

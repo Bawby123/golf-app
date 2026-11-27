@@ -1,7 +1,7 @@
-// MyCaddie offline support.
+﻿// MyCaddie offline support.
 // Pages: network first, falling back to the cached app shell when there is no signal on the course.
 // Built files, images and fonts: served from cache, refreshed in the background.
-const CACHE = 'mycaddie-v1';
+const CACHE = 'mycaddie-v2';
 const SCOPE = self.registration.scope;
 const SHELL = [SCOPE, `${SCOPE}index.html`, `${SCOPE}manifest.webmanifest`, `${SCOPE}assets/mycaddie-mark.svg`, `${SCOPE}assets/map-preview.png`, `${SCOPE}assets/course-overview.png`, `${SCOPE}assets/course-detail.png`, `${SCOPE}assets/fairway-art.svg`];
 
