@@ -1,0 +1,70 @@
+/* Review fixes: readability outdoors, scoring marks, toasts and new controls. Loaded last. */
+
+/* Readability: nothing used on the course below 12px, stronger label contrast */
+.brand .brand-tagline{font-size:10px;letter-spacing:1.4px}
+.brand{min-height:44px}
+.golf-eyebrow,.section-kicker{font-size:12px;letter-spacing:1px}
+.section-kicker{color:#4f6145}
+.hero-bottom>span,.home-metrics span{font-size:12px}
+.home-metrics span{color:#4f5d51}
+.design-app nav a{font-size:12px}
+.home-glance .action{min-height:44px;font-size:13px}
+.record-header small{font-size:12px}
+.distance-readout>span{font-size:12px;font-weight:700}
+.thumb-controls .gps-status{font-size:12px}
+.course-map .map-credit{font-size:11px}
+.design-app .course-image{background:#cfdcc4}
+
+/* Pages inside a round have no bottom navigation */
+.design-app .page-content.no-nav{padding-bottom:40px}
+
+/* Hole information in the recording header */
+.record-header .hole-meta{display:flex;flex-direction:column;gap:2px;min-width:0}
+.record-header .hole-meta strong{font-size:17px;line-height:1.2}
+.record-header .hole-meta span{font-size:13px;font-weight:600;color:#d7f58a}
+
+/* Toast with undo */
+.shot-toast{flex-direction:row;align-items:center;justify-content:space-between;gap:12px}
+.shot-toast>div{display:flex;flex-direction:column;gap:4px;min-width:0}
+.shot-toast p{font-size:13px}
+.toast-undo{flex:none;min-height:44px;padding:0 18px;border:0;border-radius:22px;background:#d7f58a;color:#173e32;font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+
+/* Cards */
+.detail-card .card-title{display:block;font-size:17px;font-weight:700;line-height:1.35;color:#203e31}
+.detail-card .card-title>span{float:right;margin-left:8px}
+
+/* Scorecard: totals, current hole and golf score marks */
+.design-app .score-line.current{border:2px solid #173e32}
+.design-app .score-total{display:grid;grid-template-columns:150fr 100fr 68fr;gap:12px;align-items:center;padding:12px;border-radius:12px;background:#e7efdc;color:#173e32;font-size:14px}
+.score-total span{color:#4f5d51}
+.score-total b{font-size:16px}
+.score-line b.score-mark{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;justify-self:start}
+.score-line b.score-mark:after{content:none}
+.score-mark.score--1{border:1.5px solid #2f6b4f;border-radius:50%}
+.score-mark.score--2{border:1.5px solid #2f6b4f;border-radius:50%;box-shadow:0 0 0 2px #fffefa,0 0 0 3.5px #2f6b4f}
+.score-mark.score-1{border:1.5px solid #8a5a1f}
+.score-mark.score-2{border:1.5px solid #8a5a1f;box-shadow:0 0 0 2px #fffefa,0 0 0 3.5px #8a5a1f}
+.round-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:4px 0 8px}
+.round-summary>div{display:flex;flex-direction:column;gap:4px;padding:14px 12px;border:1px solid #e0e6d8;border-radius:16px;background:#fffefa}
+.round-summary b{font-size:24px;color:#193e2e}
+.round-summary span{font-size:12px;color:#4f5d51}
+
+/* Finish hole */
+.finish-score{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.score-name{display:inline-block;padding:6px 12px;border-radius:999px;font-size:14px;font-weight:700;background:#eef1ea;color:#203e31}
+.score-name.score--1,.score-name.score--2{background:#d7f58a;color:#173e32}
+.score-name.score-1,.score-name.score-2{background:#f6e6cf;color:#6b4416}
+.stroke-adjust{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+.stroke-adjust>span{font-size:30px;font-weight:700;min-width:44px;text-align:center;color:#173e32}
+
+/* Notices */
+.warning-note{background:#fff4d6;border:1px solid #e8c766;color:#5b4300;border-radius:12px;padding:12px 14px;font-size:14px}
+.page-content .success-note{color:#276749;font-weight:600}
+
+/* Restore from backup: a label styled as a button around a hidden file input */
+.file-action{position:relative;overflow:hidden;cursor:pointer}
+.file-action input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.file-action:focus-within{outline:3px solid #2f6b4f;outline-offset:2px}
+
+/* Page not found */
+.not-found{display:grid;gap:16px}
