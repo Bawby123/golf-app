@@ -28,3 +28,7 @@ Course information uses the published 2025 Garden Course White tees scorecard: h
 ## Deployment
 
 Push to main to build and deploy with GitHub Actions. GitHub Pages uses the GitHub Actions source, Vite uses /golf-app/, and hash routing supports refreshing nested views. The workflow waits for uploaded artifact metadata before publishing.
+
+## Golf identity review — November 2026
+
+The golf identity adds a vector flag/green logo, a forest-green and ivory visual theme, fairway illustration, clearer button states, navigation icons and a wider desktop home layout. The recording and storage logic is unchanged. The previous Figma-aligned version is commit `287858d`. To restore that appearance after review, revert the single golf-identity commit rather than resetting history; saved browser data is independent of this visual change.

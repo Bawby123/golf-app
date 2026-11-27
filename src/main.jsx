@@ -35,3 +35,5 @@ function App(){
  </Page>;
 }
 createRoot(document.getElementById('root')).render(<HashRouter><App/></HashRouter>);
+
+import './golf-theme.css';

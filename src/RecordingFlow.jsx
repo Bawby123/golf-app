@@ -4,6 +4,7 @@ import {Action,Page,Choices} from './UI.jsx';
 import {locate,metresBetween} from './gps.js';
 import {commitShot,gpsMeasurement} from './round.js';
 import HoleSelector from './HoleSelector.jsx';
+import {Icon} from './Brand.jsx';
 
 export const recordingPaths=['/play','/shot','/clubs','/manual','/holes','/more','/gps','/map','/scorecard','/hole-shots','/finish','/end','/cancel','/shot-details'];
 const asset=name=>`${import.meta.env.BASE_URL}assets/${name}`;
@@ -84,7 +85,7 @@ export default function RecordingFlow({data,save}){
   </section>;
   if(path==='/map')return <div className="app design-app">{map(true)}</div>;
   if(path==='/play'||path==='/shot')return <div className="app design-app recorder">
-    <header className="record-header"><div><small>{round.course.split('·').at(-1).trim().toUpperCase()}</small><Action to="/scorecard" kind="quiet">Scorecard</Action></div><div><Action to="/holes" kind="outline">HOLE {round.hole}</Action><strong>{shots.length} {shots.length===1?'stroke':'strokes'}</strong></div></header>
+    <header className="record-header"><div><small>{round.course.split('·').at(-1).trim().toUpperCase()}</small><Action to="/scorecard" kind="quiet"><Icon name="scorecard" size={16}/>Scorecard</Action></div><div><Action to="/holes" kind="outline">HOLE {round.hole}</Action><strong>{shots.length} {shots.length===1?'stroke':'strokes'}</strong></div></header>
     {map()}
     <main className="thumb-controls">{path==='/play'?<>
       <div className="club-actions"><Action kind="outline" onClick={chooseClub}>{club}</Action><Action kind="tonal" onClick={()=>quickStroke('putt')}>+ Putt</Action></div>
@@ -115,3 +116,4 @@ export default function RecordingFlow({data,save}){
     {path==='/hole-shots'&&<><p>Par {round.pars?.[round.hole-1]??'—'} · {shots.length} strokes</p>{shots.length?shots.map((s,i)=><section className="detail-card" key={s.id}><h2>{i+1}. {s.type==='shot'?s.club:s.type==='putt'?'Putt':'Penalty'}</h2><p>{s.type==='shot'?`${s.distance} m · ${s.lie||'Not recorded'}`:'1 stroke'}</p>{s.type==='shot'&&<Action kind="outline" onClick={()=>edit(s)}>Edit shot</Action>}</section>):<p>No shots recorded on this hole.</p>}<Action to="/play">Record on this hole</Action><Action kind="cancel" disabled={!shots.length} onClick={undo}>Undo last stroke</Action><Action to="/scorecard" kind="quiet">Back to scorecard</Action></>}
   </Page>;
 }
+
